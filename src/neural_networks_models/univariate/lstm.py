@@ -1,15 +1,16 @@
 import pandas as pd
-from keras.src.layers import Conv1D, MaxPooling1D, Flatten, Dense
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow import keras
+from tensorflow.python.keras.layers import LSTM, Dropout
+from tensorflow.python.layers.core import Dense
 
 from src.analysis.graphs.predict_plot import predict_plot
 from src.analysis.metrics.regression_metrics import regression_metrics
 from src.neural_networks_models.base_model import BaseModel
-from src.utils.preprocess_data import preprocess_data
+from src.neural_networks_models.univariate.preprocess_data import preprocess_data
 
 
-class Cnn(BaseModel):
+class Lstm(BaseModel):
     @staticmethod
     def run(data: pd.DataFrame):
         scaler = MinMaxScaler()
@@ -19,20 +20,21 @@ class Cnn(BaseModel):
         x_train, x_test, y_train, y_test = preprocess_data(data, sequence_length)
         x_train = x_train.reshape(-1, sequence_length, 1)
         x_test = x_test.reshape(-1, sequence_length, 1)
-        # Build the CNN model
+
+        units = 150
         model = keras.Sequential(
             [
-                Conv1D(filters=200, kernel_size=3, activation='relu', input_shape=(x_train.shape[1], 1)),
-                MaxPooling1D(pool_size=2),
-                Conv1D(filters=200, kernel_size=3, activation='relu', input_shape=(x_train.shape[1], 1)),
-                MaxPooling1D(pool_size=2),
-                Flatten(),
-                Dense(50, activation='relu'),
-                Dense(1)
+                LSTM(units=units, return_sequences=True, input_shape=(sequence_length, 1)),
+                Dropout(0.2),
+                LSTM(units=units, return_sequences=True),
+                Dropout(0.2),
+                LSTM(units=units, return_sequences=False),
+                Dropout(0.2),
+                Dense(units=1)
             ]
         )
-        # Compile the model
-        model.compile(optimizer='adam', loss='mean_squared_error')  # Adjust optimizer and loss function as needed
+
+        model.compile(optimizer='adam', loss='mean_squared_error')
 
         # Train the model
         model.fit(

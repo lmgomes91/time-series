@@ -1,12 +1,12 @@
 import pandas as pd
-from keras.src.layers import Conv1D, MaxPooling1D, Flatten, Dense, GRU
+from keras.src.layers import Dense, GRU
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow import keras
 
 from src.analysis.graphs.predict_plot import predict_plot
 from src.analysis.metrics.regression_metrics import regression_metrics
 from src.neural_networks_models.base_model import BaseModel
-from src.utils.preprocess_data import preprocess_data
+from src.neural_networks_models.univariate.preprocess_data import preprocess_data
 
 
 class Gru(BaseModel):
