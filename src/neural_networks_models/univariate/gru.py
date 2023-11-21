@@ -44,6 +44,8 @@ class Gru(BaseModel):
         # Make predictions
         y_pred = model.predict(x_test)  # noqa
         # metrics
+        y_test = scaler.inverse_transform(y_test)
+        y_pred = scaler.inverse_transform(y_pred)
         regression_metrics(y_test, y_pred)
         # Plot the actual vs. predicted values
-        predict_plot(scaler.inverse_transform(y_test), scaler.inverse_transform(y_pred))
+        predict_plot(y_test, y_pred)

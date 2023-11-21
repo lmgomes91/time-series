@@ -38,7 +38,7 @@ class CnnMultivariate(BaseModel):
         model.fit(
             x_train,
             y_train,
-            epochs=50,
+            epochs=70,
             batch_size=10,
             workers=8,
             use_multiprocessing=True,
