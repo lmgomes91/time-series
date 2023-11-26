@@ -24,4 +24,4 @@ def regression_metrics(y_test: np.ndarray, y_pred: np.ndarray, model_name: str):
     logging.info(f'Mean Absolute Percentage Error (MAPE): {tf.reduce_mean(mape)}')
     logging.info(f'Theil U coefficient: {theil_u_coefficient}')
 
-    # save_result_in_db(mse, mae, rmse, mape, theil_u_coefficient, model_name)
+    save_result_in_db(mse, mae, rmse, mape, theil_u_coefficient, model_name)

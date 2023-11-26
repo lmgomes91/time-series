@@ -38,7 +38,7 @@ class GruMultivariate(BaseModel):
             y_train,
             epochs=100,
             batch_size=128,
-            workers=8,
+            workers=16,
             use_multiprocessing=True,
             validation_data=[x_train, y_train]
         )
