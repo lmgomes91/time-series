@@ -22,9 +22,9 @@ class CnnMultivariate(BaseModel):
 
         model = keras.Sequential(
             [
-                Conv1D(filters=200, kernel_size=3, activation='relu', input_shape=(x_train.shape[1], x_train.shape[2])),
+                Conv1D(filters=150, kernel_size=3, activation='relu', input_shape=(x_train.shape[1], x_train.shape[2])),
                 MaxPooling1D(pool_size=2),
-                Conv1D(filters=200, kernel_size=3, activation='relu'),
+                Conv1D(filters=150, kernel_size=3, activation='relu'),
                 MaxPooling1D(pool_size=2),
                 Flatten(),
                 Dense(50, activation='relu'),
@@ -38,7 +38,7 @@ class CnnMultivariate(BaseModel):
         model.fit(
             x_train,
             y_train,
-            epochs=70,
+            epochs=50,
             batch_size=10,
             workers=16,
             use_multiprocessing=True,
@@ -51,6 +51,6 @@ class CnnMultivariate(BaseModel):
         y_pred = scaler.inverse_transform(np.concatenate([x_test[:, -1, :4], y_pred.reshape(-1, 1)], axis=1))[:, 4]
         y_test = scaler.inverse_transform(np.concatenate([x_test[:, -1, :4], y_test.reshape(-1, 1)], axis=1))[:, 4]
         # metrics
-        regression_metrics(y_test, y_pred)
+        regression_metrics(y_test, y_pred, 'cnn_multi')
         # Plot the actual vs. predicted values
         # predict_plot(scaler.inverse_transform(y_test), scaler.inverse_transform(y_pred))

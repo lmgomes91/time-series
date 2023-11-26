@@ -3,8 +3,10 @@ import logging
 import tensorflow as tf
 import numpy as np
 
+from src.utils.db import save_result_in_db
 
-def regression_metrics(y_test: np.ndarray, y_pred: np.ndarray):
+
+def regression_metrics(y_test: np.ndarray, y_pred: np.ndarray, model_name: str):
     # Mean Squared Error (MSE):
     mse = tf.keras.metrics.mean_squared_error(y_test, y_pred)
     # Mean Absolute Error (MAE):
@@ -21,3 +23,5 @@ def regression_metrics(y_test: np.ndarray, y_pred: np.ndarray):
     logging.info(f'Root Mean Squared Error (RMSE): {tf.reduce_mean(rmse)}')
     logging.info(f'Mean Absolute Percentage Error (MAPE): {tf.reduce_mean(mape)}')
     logging.info(f'Theil U coefficient: {theil_u_coefficient}')
+
+    # save_result_in_db(mse, mae, rmse, mape, theil_u_coefficient, model_name)

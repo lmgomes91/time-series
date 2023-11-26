@@ -54,6 +54,6 @@ class LstmMultivariate(BaseModel):
         y_test = scaler.inverse_transform(np.concatenate([x_test[:, -1, :4], y_test.reshape(-1, 1)], axis=1))[:, 4]
 
         # metrics
-        regression_metrics(y_test, y_pred)
+        regression_metrics(y_test, y_pred, 'lstm_multi')
         # Plot the actual vs. predicted values
         # predict_plot(y_test.tolist(), y_pred.tolist())

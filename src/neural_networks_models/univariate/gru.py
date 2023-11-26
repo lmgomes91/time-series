@@ -46,6 +46,6 @@ class Gru(BaseModel):
         # metrics
         y_test = scaler.inverse_transform(y_test)
         y_pred = scaler.inverse_transform(y_pred)
-        regression_metrics(y_test, y_pred)
+        regression_metrics(y_test, y_pred, 'gru_uni')
         # Plot the actual vs. predicted values
-        predict_plot(y_test, y_pred)
+        # predict_plot(y_test, y_pred)
