@@ -40,7 +40,7 @@ class CnnMultivariate(BaseModel):
             y_train,
             epochs=70,
             batch_size=10,
-            workers=8,
+            workers=16,
             use_multiprocessing=True,
             validation_data=[x_train, y_train]
         )

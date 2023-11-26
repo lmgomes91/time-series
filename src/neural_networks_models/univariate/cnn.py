@@ -24,7 +24,7 @@ class Cnn(BaseModel):
             [
                 Conv1D(filters=200, kernel_size=3, activation='relu', input_shape=(x_train.shape[1], 1)),
                 MaxPooling1D(pool_size=2),
-                Conv1D(filters=200, kernel_size=3, activation='relu', input_shape=(x_train.shape[1], 1)),
+                Conv1D(filters=200, kernel_size=3, activation='relu'),
                 MaxPooling1D(pool_size=2),
                 Flatten(),
                 Dense(50, activation='relu'),
@@ -39,8 +39,8 @@ class Cnn(BaseModel):
             x_train,
             y_train,
             epochs=50,
-            batch_size=10,
-            workers=8,
+            batch_size=32,
+            workers=16,
             use_multiprocessing=True,
             validation_data=[x_train, y_train]
         )
