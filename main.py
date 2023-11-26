@@ -16,10 +16,13 @@ logging.basicConfig(
 
 
 def main():
-    # data = open_data('./data', 'BTCBUSD-1m-2023-01')
-    # Cnn().run(data)
-    # Lstm().run(data)
-    # Gru.run(data)
+    data = open_data('./data', 'BTCBUSD-1m-2023-01')
+    for _ in range(0, 10):
+        Cnn().run(data)
+    for _ in range(0, 10):
+        Gru.run(data)
+    for _ in range(0, 10):
+        Lstm().run(data)
 
     data = open_data('./data', 'BTCBUSD-1m-2023-01', True)
     for _ in range(0, 10):

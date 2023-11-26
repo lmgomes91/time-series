@@ -40,9 +40,9 @@ class Lstm(BaseModel):
         model.fit(
             x_train,
             y_train,
-            epochs=10,
-            batch_size=32,
-            workers=8,
+            epochs=100,
+            batch_size=124,
+            workers=16,
             use_multiprocessing=True,
             validation_data=[x_train, y_train]
         )
